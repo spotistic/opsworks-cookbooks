@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: sidekiq
+# Cookbook Name:: opsworks_sidekiq
 # Recipe:: restart
 #
 
