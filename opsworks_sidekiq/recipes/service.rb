@@ -1,3 +1,5 @@
+include_recipe "opsworks_sidekiq::create_env_file"
+
 service "monit" do
   supports :status => false, :restart => true, :reload => true
   action :nothing
