@@ -52,7 +52,7 @@ node[:deploy].each do |application, deploy|
       # indentation. (queues: to :queues:)
       yaml = yaml.gsub(/^(\s*)([^:][^\s]*):/,'\1:\2:')
 
-      (options[:process_count] || 1).times do |n|
+      (options[:process_count] || node[:cpu][:total] || 1).times do |n|
         file "#{config_directory}/sidekiq_#{worker}#{n+1}.yml" do
           mode 0644
           action :create
