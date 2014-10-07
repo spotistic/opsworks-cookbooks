@@ -3,11 +3,12 @@
     <% identifier = "#{@application}-#{worker}#{n+1}" %>
     <% conf_file = "#{@deploy[:deploy_to]}/shared/config/sidekiq_#{worker}#{n+1}.yml" %>
     <% pid_file = "#{@deploy[:deploy_to]}/shared/pids/sidekiq_#{identifier}.pid" %>
-    <% syslog = @syslog ? "2>&1 | logger -t sidekiq-#{identifier}" : '' %>
+    <% log_file = "#{@deploy[:deploy_to]}/shared/log/sidekiq_#{identifier}.pid" %>
+    <% log = @syslog ? "2>&1 | logger -t sidekiq-#{identifier}" : "--logfile #{log_file}" %>
 
     check process sidekiq_<%= identifier %>
       with pidfile <%= pid_file %>
-      start program = "/bin/su - <%= @deploy[:user] %> -c 'cd <%= @deploy[:current_path] %> ; . <%= @deploy[:deploy_to] %>/shared/app.env && bundle exec sidekiq -C <%= conf_file %> -P <%= pid_file %> --require ./lib/rubber.rb <%= syslog %>'" with timeout 90 seconds
+      start program = "/bin/su - <%= @deploy[:user] %> -c 'cd <%= @deploy[:current_path] %> ; . <%= @deploy[:deploy_to] %>/shared/app.env && bundle exec sidekiq -C <%= conf_file %> -P <%= pid_file %> --require ./lib/rubber.rb <%= log %>'" with timeout 90 seconds
       stop  program = "/bin/su - <%= @deploy[:user] %> -c 'kill -s TERM `cat <%= pid_file %>`'" with timeout 90 seconds
       if totalmem is greater than 1000 MB for 2 cycles then restart # restart if it takes too much memory
       group sidekiq_<%= @application %>_group
