@@ -3,7 +3,7 @@
     <% identifier = "#{@application}-#{worker}#{n+1}" %>
     <% conf_file = "#{@deploy[:deploy_to]}/shared/config/sidekiq_#{worker}#{n+1}.yml" %>
     <% pid_file = "#{@deploy[:deploy_to]}/shared/pids/sidekiq_#{identifier}.pid" %>
-    <% log_file = "#{@deploy[:deploy_to]}/shared/log/sidekiq_#{identifier}.pid" %>
+    <% log_file = "#{@deploy[:deploy_to]}/shared/log/sidekiq_worker#{n+1}.log" %>
     <% log = @syslog ? "2>&1 | logger -t sidekiq-#{identifier}" : "--logfile #{log_file}" %>
 
     check process sidekiq_<%= identifier %>
