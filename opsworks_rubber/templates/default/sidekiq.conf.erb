@@ -39,5 +39,5 @@ script
 
   . <%= @deploy[:deploy_to] %>/shared/app.env
   cd <%= @deploy[:current_path] %>
-  exec bundle exec sidekiq --index ${index} --config <%= conf_file %> --require <%= require_file %>
+  exec bundle exec sidekiq --index ${index} --config <%= @conf_file %> --require <%= @require_file %>
 end script
