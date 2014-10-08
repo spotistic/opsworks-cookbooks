@@ -75,3 +75,5 @@ template "/etc/init/#{application}.conf" do
   source "#{application}.conf.erb"
   variables :cpus => node[:cpu][:total]
 end
+
+include_recipe 'ruby'
