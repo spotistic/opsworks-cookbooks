@@ -33,11 +33,9 @@ normal exit 0 TERM
 
 instance $index
 
+# use syslog for logging
 script
-  # use syslog for logging
-  exec &> /dev/kmsg
-
   . <%= @deploy[:deploy_to] %>/shared/app.env
   cd <%= @deploy[:current_path] %>
-  exec bundle exec sidekiq --index ${index} --config <%= @conf_file %> --require <%= @require_file %>
+  exec bundle exec sidekiq --index ${index} --config <%= @conf_file %> --require <%= @require_file %> 2>&1 | logger -t sidekiq$index
 end script
