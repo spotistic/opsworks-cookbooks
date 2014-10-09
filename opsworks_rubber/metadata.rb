@@ -6,6 +6,7 @@ description      'Configure and deploy rubber on opsworks with upstart.'
 
 depends 'deploy'
 depends 'ruby'
+depends 'opsworks_bundler'
 
 recipe 'opsworks_rubber::setup',     'Set up rubber worker.'
 recipe 'opsworks_rubber::configure', 'Configure rubber worker.'

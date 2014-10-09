@@ -35,7 +35,7 @@ instance $index
 
 pre-start script
   cd <%= @deploy[:current_path] %>
-  exec bundle install
+  exec bundle install --path vendor/bundle
 end script
 
 # use syslog for logging

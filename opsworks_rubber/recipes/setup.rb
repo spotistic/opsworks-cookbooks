@@ -77,3 +77,4 @@ template "/etc/init/#{application}.conf" do
 end
 
 include_recipe 'ruby'
+include_recipe 'opsworks_bundler'
