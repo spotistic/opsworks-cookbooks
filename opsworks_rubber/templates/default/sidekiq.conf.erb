@@ -33,6 +33,11 @@ normal exit 0 TERM
 
 instance $index
 
+pre-start script
+  cd <%= @deploy[:current_path] %>
+  exec bundle install
+end script
+
 # use syslog for logging
 script
   . <%= @deploy[:deploy_to] %>/shared/app.env
