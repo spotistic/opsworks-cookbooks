@@ -1,4 +1,4 @@
-Chef::Log.debug('Running opsworks_rubber::undeploy')
+Chef::Log.info('Running opsworks_rubber::undeploy')
 include_recipe 'deploy'
 
 application = 'rubber'

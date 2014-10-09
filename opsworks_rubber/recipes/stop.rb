@@ -1,4 +1,4 @@
-Chef::Log.debug('Running opsworks_rubber::stop')
+Chef::Log.info('Running opsworks_rubber::stop')
 
 execute 'stop Rubber app' do
   command node[:rubber][:commands][:stop]

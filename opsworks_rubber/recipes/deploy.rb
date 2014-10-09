@@ -1,4 +1,4 @@
-Chef::Log.debug('Running opsworks_rubber::deploy')
+Chef::Log.info('Running opsworks_rubber::deploy')
 
 application = 'rubber'
 include_recipe 'deploy'
@@ -11,7 +11,7 @@ opsworks_deploy_dir do
   path deploy[:deploy_to]
 end
 
-Chef::Log.debug('Deploying Rubber Application')
+Chef::Log.info('Deploying Rubber Application')
 opsworks_deploy do
   deploy_data deploy
   app application
@@ -23,7 +23,7 @@ if File.exists?("#{deploy[:deploy_to]}/Gemfile")
   Chef::Log.info(OpsWorks::ShellOut.shellout("sudo su - #{deploy[:user]} -c 'cd #{deploy[:deploy_to]} && /usr/local/bin/bundle install --path #{deploy[:home]}/.bundler/#{application} --without=#{deploy[:ignore_bundler_groups].join(' ')}' 2>&1"))
 end
 
-Chef::Log.debug('Restarting Rubber Application')
+Chef::Log.info('Restarting Rubber Application')
 execute 'restart Rubber app' do
   command node[:rubber][:commands][:restart]
 end

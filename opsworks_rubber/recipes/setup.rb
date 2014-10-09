@@ -1,5 +1,5 @@
 # setup rubber service
-Chef::Log.debug('Running opsworks_rubber::setup')
+Chef::Log.info('Running opsworks_rubber::setup')
 
 application = 'rubber'
 deploy = node[:deploy][application]
