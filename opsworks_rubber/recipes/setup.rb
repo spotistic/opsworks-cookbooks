@@ -78,3 +78,8 @@ end
 
 include_recipe 'ruby'
 include_recipe 'opsworks_bundler'
+include_recipe 'gem_support'
+gem_package 'bundler' do
+  retries 2
+  options '--no-ri --no-rdoc'
+end
