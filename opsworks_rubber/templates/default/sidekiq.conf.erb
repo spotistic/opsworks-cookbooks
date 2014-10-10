@@ -32,6 +32,7 @@ respawn limit 3 30
 normal exit 0 TERM
 
 instance $index
+env LANG=en_US.UTF-8
 
 pre-start script
   cd <%= @deploy[:current_path] %>
