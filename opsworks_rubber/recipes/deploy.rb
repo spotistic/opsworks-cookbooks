@@ -17,9 +17,9 @@ opsworks_deploy do
   app application
 end
 
-if File.exists?("#{deploy[:deploy_to]}/Gemfile")
+if File.exists?("#{deploy[:current_path]}/Gemfile")
   Chef::Log.info("Gemfile detected. Running bundle install.")
-  cmd = "sudo su - #{deploy[:user]} -c 'cd #{deploy[:deploy_to]} && /usr/local/bin/bundle install --path #{deploy[:home]}/.bundler/#{application} --without=#{deploy[:ignore_bundler_groups].join(' ')}'"
+  cmd = "sudo su - #{deploy[:user]} -c 'cd #{deploy[:current_path]} && /usr/local/bin/bundle install --path #{deploy[:home]}/.bundler/#{application} --without=#{deploy[:ignore_bundler_groups].join(' ')}'"
   Chef::Log.info(cmd)
   Chef::Log.info(OpsWorks::ShellOut.shellout("#{cmd} 2>&1"))
 end
