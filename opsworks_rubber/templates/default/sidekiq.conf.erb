@@ -34,11 +34,6 @@ normal exit 0 TERM
 instance $index
 env LANG=en_US.UTF-8
 
-pre-start script
-  cd <%= @deploy[:current_path] %>
-  exec bundle install --path vendor/bundle
-end script
-
 # use syslog for logging
 script
   . <%= @deploy[:deploy_to] %>/shared/app.env
