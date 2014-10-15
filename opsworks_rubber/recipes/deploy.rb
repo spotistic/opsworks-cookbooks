@@ -19,8 +19,9 @@ end
 
 if File.exists?("#{deploy[:deploy_to]}/Gemfile")
   Chef::Log.info("Gemfile detected. Running bundle install.")
-  Chef::Log.info("sudo su - #{deploy[:user]} -c 'cd #{deploy[:deploy_to]} && /usr/local/bin/bundle install --path #{deploy[:home]}/.bundler/#{application} --without=#{deploy[:ignore_bundler_groups].join(' ')}'")
-  Chef::Log.info(OpsWorks::ShellOut.shellout("sudo su - #{deploy[:user]} -c 'cd #{deploy[:deploy_to]} && /usr/local/bin/bundle install --path #{deploy[:home]}/.bundler/#{application} --without=#{deploy[:ignore_bundler_groups].join(' ')}' 2>&1"))
+  cmd = "sudo su - #{deploy[:user]} -c 'cd #{deploy[:deploy_to]} && /usr/local/bin/bundle install --path #{deploy[:home]}/.bundler/#{application} --without=#{deploy[:ignore_bundler_groups].join(' ')}'"
+  Chef::Log.info(cmd)
+  Chef::Log.info(OpsWorks::ShellOut.shellout("#{cmd} 2>&1"))
 end
 
 Chef::Log.info('Restarting Rubber Application')
