@@ -40,3 +40,11 @@ script
   cd <%= @deploy[:current_path] %>
   exec bundle exec sidekiq --index ${index} --config <%= @conf_file %> --require <%= @require_file %> 2>&1 | logger -t sidekiq$index
 end script
+
+pre-start script
+  echo "[`date`] Starting Sidekiq${index}"
+end script
+
+pre-stop script
+  echo "[`date`] Stopping Sidekiq${index}"
+end script
